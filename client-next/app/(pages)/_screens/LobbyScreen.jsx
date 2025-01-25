@@ -11,6 +11,8 @@ const LobbyScreen = ({ setRoomId, setGame, setTitle, setDifficulty, setTopic, se
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!gameCode) return;
+
         const url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/games?gameId=${gameCode}`;
 
         try {
@@ -26,7 +28,7 @@ const LobbyScreen = ({ setRoomId, setGame, setTitle, setDifficulty, setTopic, se
             } else {
                 const game = data.games[0];
                 setGame(game);
-                
+
                 setRoomId(gameCode);
 
                 setTitle(game.title);

@@ -15,7 +15,7 @@ const io = socketIo(server, {
     }
 });
 
-const games = [];
+let games = [];
 
 io.on('connection', socket => {
     console.log(`User joined: ${socket.id}`);

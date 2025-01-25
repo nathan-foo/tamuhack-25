@@ -6,9 +6,9 @@ import { gameQuestions } from "@/models/game-questions";
 export async function POST(request) {
     const { title, difficulty, topic, rounds, gameId, createdBy } = await request.json();
 
-    const GAME_PROMPT = `Generate a set of ${rounds} coding interview questions covering ${topic} with a difficulty level of ${difficulty}. Provide examples of expected output. The question should be thorough and detailed and resemble the style of leetcode questions. The question titles should describe the problem that is being generated. Output the response in JSON format. The text will be placed in an HTML div, so do not format output at all. No asterisks or code blocks. Follow the given structure:\n{\ntitle: String,\ndifficulty: String,\ntopic: String,\nquestions: [\n{\ntitle: String,\nquestion: String,\nexample_1: String,\nexample_2: String,\n}\n]\n}`;
+    const GAME_PROMPT = `Generate a set of ${rounds} coding interview questions covering ${topic} with a difficulty level of ${difficulty}. Provide examples of expected output. The question should be thorough and detailed and resemble the style of leetcode questions. The question titles should describe the problem that is being generated. Output the response in JSON format. The text will be placed in an HTML div, so do not format output at all. No asterisks or code blocks. Follow the given structure:\n{\nquestions: [\n{\ntitle: String,\nquestion: String,\nexample_1: String,\nexample_2: String,\n}\n]\n}`;
 
-    const gameResponse = await gameQuestions(GAME_PROMPT);
+    const gameResponse = await gameQuestions.sendMessage(GAME_PROMPT);
     const questions = JSON.parse(gameResponse.response.text());
 
     await connectDB();

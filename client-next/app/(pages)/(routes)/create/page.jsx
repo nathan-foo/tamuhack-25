@@ -61,7 +61,7 @@ const CreatePage = () => {
 
     return (
         <div className='flex items-center justify-center h-screen'>
-            {/* Need to fill out the title, difficulty, topic (like hashmap or array or wtv leetcode topics there are) and # of rounds * 2 (because two questions per round) */}
+            {/* Need to fill out the title, difficulty, topic (like hashmap or array or wtv leetcode topics there are) and # of rounds */}
             {/* Then show game code on screen so player can copy it and share */}
             <button onClick={generateGame}>Generate</button>
         </div>

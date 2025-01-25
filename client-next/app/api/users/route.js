@@ -22,8 +22,8 @@ export async function GET(request) {
 }
 
 export async function DELETE(request) {
-    const id = request.nextUrl.searchParams.get("id");
+    const clerkId = request.nextUrl.searchParams.get("clerkId");
     await connectDB();
-    await User.findByIdAndDelete(id);
+    await User.findByIdAndDelete(clerkId);
     return NextResponse.json({ message: "User Deleted" }, { status: 200 });
 }

@@ -29,6 +29,7 @@ npm i @google/generative-ai
 npm i socket.io-client
 npm i mongodb
 npm i mongoose
+npm i react-icons
 ```
 
 In `backend`:

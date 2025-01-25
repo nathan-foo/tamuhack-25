@@ -56,8 +56,6 @@ io.on('connection', socket => {
         socket.room = room;
         socket.name = player.name;
 
-        console.log(questions);
-
         io.to(room).emit('broadcastPlayerJoin', player, game.players);
     });
 

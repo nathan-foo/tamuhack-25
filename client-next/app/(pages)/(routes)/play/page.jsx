@@ -26,7 +26,7 @@ const PlayPage = () => {
 
   // Game states
   const [question, setQuestion] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState(null);
   const [intermission, setIntermission] = useState(false);
 
@@ -58,7 +58,7 @@ const PlayPage = () => {
   // Send message to socket when player joins a room
   useEffect(() => {
     if (!roomId) return;
-    socket.emit('playerJoin', roomId, game.content);
+    socket.emit('playerJoin', roomId, game.content.questions);
   }, [roomId]);
 
   useEffect(() => {
@@ -86,9 +86,9 @@ const PlayPage = () => {
                 <div>
                   {question ? (
                     <div>
-                      {!submitted ? (
+                      {!answer ? (
                         // Screen displaying the current coding question
-                        <CodeScreen />
+                        <CodeScreen question={question} setAnswer={setAnswer} />
                       ) : (
                         // Waiting room
                         <WaitingScreen />

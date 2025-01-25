@@ -8,10 +8,16 @@ import FeedbackScreen from '../../_screens/FeedbackScreen';
 import WaitingScreen from '../../_screens/WaitingScreen';
 import EndScreen from '../../_screens/EndScreen';
 import IntermissionScreen from '../../_screens/IntermissionScreen';
+import { io } from 'socket.io-client';
+import toast from 'react-hot-toast';
+
+let socket;
 
 const PlayPage = () => {
-  // From lobby screen
+  // Room info
   const [roomId, setRoomId] = useState();
+  const [player, setPlayer] = useState();
+  const [players, setPlayers] = useState();
 
   // Game setup
   const [game, setGame] = useState(null);
@@ -30,6 +36,26 @@ const PlayPage = () => {
   const [topic, setTopic] = useState("");
   const [rounds, setRounds] = useState("");
 
+  useEffect(() => {
+    socket = io('http://localhost:8000');
+
+    socket.on('broadcastPlayerJoin', (player, players) => {
+      setPlayer(player);
+      setPlayers(players);
+      toast.success(`${player.name} joined the game`);
+    });
+
+    socket.on('broadcastPlayerLeave', (players) => {
+      setPlayers(players);
+    })
+  }, []);
+
+  // Send message to socket when player joins a room
+  useEffect(() => {
+    if (!roomId) return;
+    socket.emit('playerJoin', roomId);
+  }, [roomId]);
+
   return (
     <div>
       {!game ? (
@@ -38,8 +64,12 @@ const PlayPage = () => {
       ) : (
         <div>
           {!started ? (
-            // Screen to start the game
-            <StartScreen title={title} difficulty={difficulty} topic={topic} rounds={rounds} setStarted={setStarted} />
+            <div>
+              {players && (
+                // Screen to start the game
+                <StartScreen title={title} difficulty={difficulty} topic={topic} rounds={rounds} players={players} setStarted={setStarted} />
+              )}
+            </div>
           ) : (
             <div>
               {!ended ? (
@@ -59,13 +89,13 @@ const PlayPage = () => {
                     <div>
                       {feedback ? (
                         <div>
-                        {!intermission ? (
-                          // Show feedback for user answer
-                          <FeedbackScreen />
-                        ) : (
-                          // Score vs opponent etc.
-                          <IntermissionScreen />
-                        )}
+                          {!intermission ? (
+                            // Show feedback for user answer
+                            <FeedbackScreen />
+                          ) : (
+                            // Score vs opponent etc.
+                            <IntermissionScreen />
+                          )}
                         </div>
                       ) : (
                         // Waiting room

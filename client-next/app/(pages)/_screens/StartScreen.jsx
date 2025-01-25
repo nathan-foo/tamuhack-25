@@ -1,16 +1,36 @@
 import React from 'react'
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const StartScreen = ({ title, difficulty, topic, rounds, setStarted }) => {
   return (
-    <div className='flex items-center justify-center h-screen'>
+    <div className='flex items-center justify-center text-center h-screen'>
       {/* This is the screen when the players have entered a room code and are waiting to start the game */}
-        <ul>
+      <Card className="w-[50%]">
+      <CardHeader >
+        <CardTitle className = "m-3" >{title}</CardTitle>
+        <CardDescription>The game is ready. Click "Start Game" to begin.</CardDescription>
+      </CardHeader>
+      <CardContent> This game will cover {topic} with a difficulty level of {difficulty} and {rounds} rounds. 
+      <Button className ="w-[50%] bg-gray-800 text-white hover:bg-gray-900 m-5" onClick={setStarted}>Start Game</Button>
+      </CardContent>
+      
+      </Card>
+    
+        {/* <ul>
             <li>{title}</li>
             <li>{difficulty}</li>
             <li>{topic}</li>
             <li>{rounds}</li>
-            <button onClick={setStarted}>start game</button>
-        </ul>
+            <Button className ="w-full bg-gray-800 text-white hover:bg-gray-900" onClick={setStarted}>Start Game</Button>
+        </ul> */}
     </div>
   )
 }

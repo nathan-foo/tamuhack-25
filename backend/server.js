@@ -20,7 +20,7 @@ let games = [];
 io.on('connection', socket => {
     console.log(`User joined: ${socket.id}`);
 
-    socket.on('playerJoin', (room) => {
+    socket.on('playerJoin', (room, questions) => {
         console.log(`User joined room: ${socket.id}`);
         socket.join(room);
 
@@ -31,16 +31,32 @@ io.on('connection', socket => {
                 {
                     roomId: room,
                     players: [],
+                    questions: questions,
                 }
             );
             game = games.find(game => game.roomId === room);
         }
 
-        const player = { name: `Player ${game?.players.length + 1}` };
+        const player = {
+            name: `Player ${game?.players.length + 1}`,
+            totalScore: 0,
+            totalTimeScore: 0,
+            totalSpaceScore: 0,
+            totalDsaScore: 0,
+            totalClarityScore: 0,
+            currentScore: 0,
+            currentTimeScore: 0,
+            currentSpaceScore: 0,
+            currentDsaScore: 0,
+            currentClarityScore: 0,
+            questionIndex: 0,
+        };
         game.players.push(player);
 
         socket.room = room;
         socket.name = player.name;
+
+        console.log(questions);
 
         io.to(room).emit('broadcastPlayerJoin', player, game.players);
     });
@@ -52,13 +68,17 @@ io.on('connection', socket => {
 
         if (game) {
             game.players = game.players.filter(player => player.name != socket.name);
-
-            io.to(socket.room).emit('broadcastPlayerLeave', game.players);
-
             if (game.players.length === 0) {
                 games = games.filter(game => game.roomId !== socket.room);
+            } else {
+                io.to(socket.room).emit('broadcastPlayerLeave', game.players);
             }
         }
+    });
+
+    socket.on('gameStarted', (room) => {
+        let game = games.find(game => game.roomId === room);
+        io.to(room).emit('broadcastGameStarted', game.questions[0]);
     });
 
 

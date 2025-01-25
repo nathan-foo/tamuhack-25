@@ -29,12 +29,12 @@ const LobbyScreen = ({ setRoomId, setGame, setTitle, setDifficulty, setTopic, se
                 const game = data.games[0];
                 setGame(game);
 
-                setRoomId(gameCode);
-
                 setTitle(game.title);
                 setDifficulty(game.difficulty);
                 setTopic(game.topic);
                 setRounds(game.rounds);
+
+                setRoomId(gameCode);
 
                 setError("");
             }

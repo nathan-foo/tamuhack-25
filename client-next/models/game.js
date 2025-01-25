@@ -5,7 +5,7 @@ const schema = new Schema(
         title: String,
         difficulty: String,
         topic: String,
-        questions: Object,
+        content: Object,
         rounds: String,
         gameId: String,
         createdBy: String,

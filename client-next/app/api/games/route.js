@@ -11,8 +11,10 @@ export async function POST(request) {
     const gameResponse = await gameQuestions.sendMessage(GAME_PROMPT);
     const questions = JSON.parse(gameResponse.response.text());
 
+    console.log(questions);
+
     await connectDB();
-    await Game.create({ title, difficulty, topic, rounds, questions: questions, gameId, createdBy });
+    await Game.create({ title, difficulty, topic, rounds, content: questions, gameId, createdBy });
     return NextResponse.json({ message: "Game Created" }, { status: 201 });
 }
 

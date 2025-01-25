@@ -47,14 +47,24 @@ const PlayPage = () => {
 
     socket.on('broadcastPlayerLeave', (players) => {
       setPlayers(players);
-    })
+    });
+
+    socket.on('broadcastGameStarted', (question) => {
+      setQuestion(question);
+      setStarted(true);
+    });
   }, []);
 
   // Send message to socket when player joins a room
   useEffect(() => {
     if (!roomId) return;
-    socket.emit('playerJoin', roomId);
+    socket.emit('playerJoin', roomId, game.content);
   }, [roomId]);
+
+  useEffect(() => {
+    if (!started) return;
+    socket.emit('gameStarted', roomId);
+  }, [started]);
 
   return (
     <div>

@@ -49,6 +49,7 @@ const CodeScreen = ({ question, setAnswer }) => {
   const [counter, setCounter] = useState(120);  // Countdown timer for 2 minutes
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
+  const [textInput, setTextInput] = useState("");
   const mediaRecorderRef = useRef(null);
   
   const {
@@ -125,6 +126,20 @@ const CodeScreen = ({ question, setAnswer }) => {
     return <div className="flex items-center justify-center h-screen">Loading...</div>;
   }
 
+  const handleChange = (e) => {
+    setTextInput(e.target.value);
+    console.log(textInput);
+  }
+
+  const handleSubmit = () => {
+    if (microphone) {
+      setAnswer(transcript);
+    } else {
+      if (!textInput) return;
+      setAnswer(textInput);
+    }
+  }
+
   return (
     <div className="bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip text-white h-screen text-sm pt-16">
       <div className="grid grid-cols-2 gap-4 p-4">
@@ -152,7 +167,7 @@ const CodeScreen = ({ question, setAnswer }) => {
         <div className='grid grid-rows-2 gap-4'>
           {!microphone ? (
             <div className='flex items-start justify-start'>
-              <Textarea className='bg-slate-900 text-white w-full h-[400px] p-6 text-start' placeholder='Type here...'></Textarea>
+              <Textarea onChange={handleChange} className='bg-slate-900 text-white w-full h-[400px] p-6 text-start' placeholder='Type here...'></Textarea>
             </div>
           ) : (
             <div className='flex items-start justify-start'>
@@ -173,6 +188,7 @@ const CodeScreen = ({ question, setAnswer }) => {
               </button>
               <Button className="px-12 py-4 bg-white text-black hover:bg-gray-100 m-5"
                 // onClick={(() => setAnswer('use a two pointer approach, this algorithm has a time complexity of n^4 and a space complexity of n^2'))}
+                onClick={handleSubmit}
               >
                 Submit
               </Button>

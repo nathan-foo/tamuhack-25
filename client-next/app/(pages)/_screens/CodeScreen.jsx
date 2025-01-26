@@ -52,7 +52,9 @@ const CodeScreen = ({ question, setAnswer }) => {
                   <FaMicrophone className='text-6xl text-red-600' />
                 )}
               </button>
-              <Button className="px-12 py-4 bg-white text-black hover:bg-gray-100 m-5" onClick={(() => setAnswer('use a two pointer approach, this algorithm has a time complexity of n^4 and a space complexity of n^2'))}>
+              <Button className="px-12 py-4 bg-white text-black hover:bg-gray-100 m-5"
+                // onClick={(() => setAnswer('use a two pointer approach, this algorithm has a time complexity of n^4 and a space complexity of n^2'))}
+              >
                 Submit
               </Button>
             </div>

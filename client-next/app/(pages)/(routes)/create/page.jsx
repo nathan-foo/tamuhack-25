@@ -78,10 +78,16 @@ const CreatePage = () => {
     }
 
     return (
-        <div className = "bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip ">
+        <div className="bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip ">
             <Stars />
             {!code ? (
                 <div className='flex flex-col items-center justify-center text-center h-screen'>
+                    <div className='text-white font-bold text-6xl mb-6'>
+                        Create
+                    </div>
+                    <div className='text-white mb-10'>
+                        Generate a custom game for any leetcode topic.
+                    </div>
                     <input
                         className='px-28 py-3 text-center rounded-md m-2'
                         placeholder='Enter game title...'
@@ -112,8 +118,8 @@ const CreatePage = () => {
                             <SelectContent>
                                 <SelectItem value="arrays">Arrays</SelectItem>
                                 <SelectItem value="strings">Strings</SelectItem>
-                                <SelectItem value="linkedlists">Linked Lists</SelectItem>
-                                <SelectItem value="hashmaps">Hash Maps</SelectItem>
+                                <SelectItem value="linked lists">Linked Lists</SelectItem>
+                                <SelectItem value="hash maps">Hash Maps</SelectItem>
                                 <SelectItem value="trees">Trees</SelectItem>
                                 <SelectItem value="stacks">Stacks</SelectItem>
                                 <SelectItem value="queues">Queues</SelectItem>

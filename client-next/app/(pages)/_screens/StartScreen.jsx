@@ -15,7 +15,7 @@ const StartScreen = ({ title, difficulty, topic, rounds, setStarted, player, pla
       <div className='flex items-center justify-center text-center h-screen'>
       
   <div className="max-w-md rounded-3xl p-1 bg-gradient-to-b from-purple-600 to-purple-400 ">
-    <div className="rounded-[calc(1.5rem-1px)] p-10 bg-white ">
+    <div className="rounded-[calc(1.5rem-1px)] p-10 bg-white">
     <h3 className="text-lg font-medium text-gray-700">{title}</h3>
     <p> The game is ready. Click "Start Game" to begin.</p>
     <p> This game will cover {topic} with a difficulty level of {difficulty} and {rounds} rounds. </p>

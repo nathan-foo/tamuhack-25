@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, body {
-  background-color: #f8fafc;
+  background-color: black;
 }
 
 @layer base {
@@ -11,3 +11,13 @@ html, body {
     --radius: 0.5rem;
   }
 }
+
+/* Hide the scrollbar for all browsers */
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  overflow: scroll; /* Ensure content is scrollable */
+}
+

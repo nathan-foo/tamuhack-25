@@ -1,21 +1,32 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Navbar from "../_components/Navbar";
+import MobileNavbar from "../_components/MobileNavbar";
+import { Hero } from "../_components/Hero";
+import { Footer } from "../_components/Footer";
+import LandingInfo from "../_components/LandingInfo";
+
 
 export default function Home() {
-  const { user } = useUser();
-
+  
   return (
-    <div className="flex items-center justify-center h-screen">
-      {user ? (
-        <div>
-          Hello, {user.firstName}!
-        </div>
-      ) : (
-        <div>
-          Hello, world!
-        </div>
-      )}
+    <div>
+
+      {/* <Navbar />
+      <MobileNavbar /> */}
+      <Hero />
+      <LandingInfo />
+      <Footer/>
+
     </div>
+    
   );
 }

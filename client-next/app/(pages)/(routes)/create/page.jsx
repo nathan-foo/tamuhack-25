@@ -6,6 +6,7 @@ import { useUser } from '@clerk/nextjs';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import ShortUniqueId from 'short-unique-id';
+import Stars from '../../_components/Stars';
 
 const CreatePage = () => {
     const [title, setTitle] = useState("");
@@ -78,6 +79,7 @@ const CreatePage = () => {
 
     return (
         <div className='bg-black bg-[linear-gradient(to_bottom,#0000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] relative overflow-clip'>
+            <Stars />
             {!code ? (
                 <div className='flex flex-col items-center justify-center text-center h-screen'>
                     <input
@@ -125,6 +127,7 @@ const CreatePage = () => {
                     Game code: {code}
                 </div>
             )}
+            <div className="absolute h-[375px] w-[130%] rounded-[100%] bg-black left-1/2 -translate-x-1/2 border border-[#B48CDE] bg-[radial-gradient(closest-side,#000000_82%,#9560EB)] top-[calc(100%-125px)]" />
         </div>
     )
 }

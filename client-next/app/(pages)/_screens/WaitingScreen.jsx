@@ -25,7 +25,7 @@ const WaitingScreen = () => {
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-black text-white'>
       <div className="w-[60%] flex flex-col items-center">
-        <Progress value={progress} className="w-full [&>div]:bg-gradient-to-r [&>div]:from-purple-400 [&>div]:via-purple-500 [&>div]:to-indigo-500 [&>div]:rounded-l-full" />
+        <Progress value={progress} className="w-full [&>div]:bg-gradient-to-r [&>div]:from-purple-400 [&>div]:via-purple-500 [&>div]:to-purple-700 [&>div]:rounded-l-full" />
         <span className="text-sm mt-2">{progress}%</span>
       </div>
       <div className="mt-4">

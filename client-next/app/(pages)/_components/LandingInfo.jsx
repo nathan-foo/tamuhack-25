@@ -11,7 +11,7 @@ import {
 
 const LandingInfo = () => {
     return(
-        <div className = "mt-10">
+        <div className = "mt-10 mx-4">
             <motion.div className="flex justify-center" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 2, delay: 0.5 }}>
                 <Card className="w-[50%] bg-black m-8">
                     <CardHeader>

@@ -13,17 +13,23 @@ export const Hero = () => {
             <div className="flex items-center justify-center relative min-h-screen">
                 {user ? (
                     <div className="text-center">
-                    <p className="text-6xl font-bold text-white py-4">Hello, {user.firstName}!</p>
-                    <p className="text-base">Welcome to RaceCode.</p>
-                    <Link href="play">
-                        <Button href='/play'className="m-8 px-12 transform hover:scale-110 transition-transform duration-300">Play<ArrowRight/></Button>
-                    </Link>
-                </div>
 
-
+                        <div className="text-6xl font-bold text-white py-4"><Typewriter
+                            options={{
+                            strings: [`Hello, ${user.firstName}!`],
+                            autoStart: true,
+                            pauseFor: 1000000,
+                            loop: true,
+                        }}
+                        /></div>
+                        <p className="text-base">Welcome to RaceCode.</p>
+                        <Link href="play">
+                            <Button href='/play'className="m-8 px-12 rounded-full bg-white text-black transform hover:bg-gray-200 mx-auto mt-8">Play</Button>
+                        </Link>
+                    </div>
                 ) : (
                     <div className="text-center">
-                        
+
                         <div className="text-6xl font-bold mt-8">
                             <Typewriter
                             options={{
@@ -35,8 +41,10 @@ export const Hero = () => {
                         /></div>
                         <p className="text-base mt-6">A 1v1 LeetCode blitz interview preparation game.</p>
                         <Link href="sign-in">
-                            <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8">Get started<ArrowRight/></Button>
-                       </Link>
+
+                            <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8 ">Get started<ArrowRight/></Button>
+                        </Link>
+
                     </div>
                 )}
             </div>

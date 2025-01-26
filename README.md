@@ -1,91 +1,60 @@
-# TAMUhack 2025
+# RaceCode
 
-## Project Setup
-Clone the repository onto your device and open the repository folder.
+## Inspiration
 
-To start the Next.js app:
-1. From the root directory, run `cd client-next` and `npm install` in the terminal.
-2. Use `npm run dev` to start the project on `localhost:3000`.
+According to Gemini AI, over 80% of software engineering positions require a technical coding portion as part of the interview process. Because of this, many students use platforms like LeetCode to practice their problem solving skills. The issue, however, is that students often focus only on solving as many questions as possible and forget to practice explaining their thought process, which is equally—if not more—important. That's why we made RaceCode: a multiplayer game platform to nail the technical interview!
 
-To start the Express server:
-1. From the root directory, run `cd backend` and `npm install` in the terminal.
-2. Use `node server.js` or `nodemon start` to start the server on `localhost:8000`.
+## What it does
 
-Note: You will need to have two terminals open to host the backend and frontend at the same time!
+RaceCode is designed to help players practice explaining their approaches to technical interview problems. Users can choose topics to learn and compete with other coders in a real-time game environment that provides personalized feedback for each player's answers. All content on the platform is generated with AI, providing an unlimited collection of coding problems for players to practice!
 
-## NPM Packages
+## How we built it
 
-The following npm packages should already be included in the package.json files, so you can simply run `npm i`.
+Our project was built with the following technologies:
+- Next.js
+- React.js/Tailwind
+- Gemini API
+- Express.js
+- MongoDB Atlas
+- Socket.io
+- Livekit
+- Clerk Authentication
+- React Speech Recognition
 
-Before pushing to GitHub, create a `.gitignore` file in the backend folder so you don't push the node modules.
+User Authentication
+- We used Clerk webhooks to listen for user sign-up events.
+- When a user signs up, the webhook triggers a POST event to create a MongoDB database user.
 
-In `client-next`:
-```
-npx create-next-app@latest // Use React ^18 instead of 19 because of dependencies
-npx shadcn@latest init
-npm i @clerk/nextjs
-npm i svix
-npm i @google/generative-ai
-npm i socket.io-client
-npm i mongodb
-npm i mongoose
-npm i react-icons
-```
+Game Creation
+- On the Create page, a user has options to set a title, number of rounds, difficulty level, and topic (e.g. arrays, linked lists, etc.) for a new game.
+- When the user submits their options, the data is passed to a Gemini API function to generate the game questions.
+- The output is returned in a JSON format and then stored in MongoDB via a POST request.
+- A game code is generated for players to compete with their friends.
 
-In `backend`:
-```
-npm i express
-npm i socket.io
-npm i cors
-```
+Gameplay
+- Users can join a lobby by entering a game code in the play page.
+- On game start, all players in the lobby are sent to a coding screen. We used socket.io to broadcast events in real time to the players.
+- The coding screen features a question fetched from the database with example outputs, a live camera view of each player using Livekit, and a text and microphone input for users to submit their responses.
+- Through the microphone input, players can see a live transcription of their response on the screen. When a user is finished responding, the transcript is parsed into text and sent to Gemini API for evaluation.
+- Once all players have responded, each player gets individual feedback from their answer. Each player receives an overall score, as well as scores for time complexity, space complexity, use of data structures and algorithms, and overall effectiveness of their response, as well as feedback on each category.
+- The user can then compare their scores against the competition through a leaderboard.
+- This cycle continues until all rounds have been exhausted.
 
-## Environment Variables
-Copy these variables into a `.env.local` file in the `client-next` directory.
+Dashboard
+- The dashboard features all games created by the user, player statistics, and areas of improvement.
 
-**Do NOT paste these keys in your code. Do NOT push this file to the repo!!!**
+## Challenges we ran into
 
-```
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+We ran into several challenges throughout the course of this hackathon. One of these challenges was rendering the Livekit.io streaming platform on our site, as the components were rendering incorrectly and our tokens were misconfigured. Another challenge we faced was integrating speech to text in the coding screen. We had to experiment with a couple of different providers before reaching our current solution.
 
-MONGODB_URI=
+## Accomplishments that we're proud of
 
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-SIGNING_SECRET=
+We are really happy with how this project turned out! We were able to implement all of the features we had planned and hope to improve on this project in the future.
 
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+## What we learned
 
-NEXT_PUBLIC_GEMINI_API_KEY=
+We learned to use a ton of new technologies that we weren't familiar with, such as Livekit, socket.io, and speech recognition. But more importantly, we learned to have fun and to not give up!
 
-// TODO: Add AWS keys
-```
+## What's next for RaceCode
 
-## Tech Stack
-- Next.js: https://nextjs.org/docs
-- React/Tailwind: https://tailwindcss.com/docs/
-- Express.js: https://expressjs.com/
-- Socket.io: https://socket.io/docs/v4/
-- MongoDB: https://www.mongodb.com/products/platform/atlas-database
-- Gemini API: https://ai.google.dev/
-- AWS Transcribe: https://aws.amazon.com/blogs/machine-learning/transcribe-speech-to-text-in-real-time-using-amazon-transcribe-with-websocket/
-- Clerk Authentication: https://clerk.com/docs
-- Livekit.io: https://docs.livekit.io/home/
-
-## General Approach
-
-Design a working play page, where:
-1. A signed in user has the option to join or create a game with custom topics, time limit, number of questions, and difficulty (dropdown menu for options preferably).
-2. When a user creates a game, Gemini API will generate questions and return a json object that we can use.
-3. The output from Gemini is stored in a database via API requests.
-4. The user is given a game code to invite a friend, which will also be stored in the database.
-5. When two players join a game, no more players can be added.
-6. On game start, users will take turns answering questions fetched from the database. Users will submit answers by pressing an audio record button (using AWS Transcribe) or by typing in a text area.
-7. After each question, the user input is converted to text and sent to Gemini API for scoring. The scores will be based on time complexity, space complexity, correct usage of data structures and algorithms, and clarity/thoroughness of the approach, and feedback will be provided for the user's response.
-8. Integrate Livekit.io so that users can see their opponent during a game. Mute players while it is not their turn and allow them to spectate their opponent as they respond. (Or have both players complete each round at the same time.)
-9. If we have time left, add sound effects and basic animations to the game.
-
-Design a dashboard page, where:
-1. Users can view their game history, win statistics, and areas for improvement (time/space complexity, DSA, response effectiveness). Data for game history and scores will be stored to MongoDB after each game.
-
-Design a landing page, make app flowchart and video presentation, prepare pitch, etc.
+In the future, we want to improve on RaceCode by adding new game modes, showing more detailed user statistics, and recommending topics to practice based on past game performance.

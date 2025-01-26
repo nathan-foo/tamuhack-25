@@ -1,14 +1,11 @@
-const Footer = () => {
-
-    return (
-        <footer className="mt-20 bg-black">
-            <div className="custom-screen">
-                <div className="mt-10 py-8 border-t border-gray-800 items-center justify-between sm:flex bg-black">
-                    <p className="text-white text-center">© 2025 Race Code. All rights reserved.</p>
+export const Footer = () => {
+    return(
+        <footer className = "py-5 text-white/60">
+        
+                <div className = "flex flex-col content-center items-center">
+                    <div className = "text-center">© 2025 RaceCode, Inc. All rights reserved.</div>
                 </div>
-            </div>
+         
         </footer>
-    )
+    );
 }
-
-export default Footer

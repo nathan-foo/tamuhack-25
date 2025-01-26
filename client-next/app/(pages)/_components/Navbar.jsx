@@ -23,12 +23,12 @@ const Navbar = () => {
     }, []);
 
   return (
-    <div className={`hidden md:block fixed top-0 left-0 w-full py-3 px-6 ${isScrolled ? 'shadow-md' : 'shadow-none'} transition-shadow duration-300 bg-black z-50`}>
+    <div className={`hidden md:block fixed top-0 left-0 w-full py-3 px-6 ${isScrolled ? 'shadow-md' : 'shadow-none'} transition-shadow duration-300 z-50`}>
         <div className='flex justify-between'>
             <div className='flex items-center justify-start gap-3 w-full'>
                 <Link href='/'>
                     <div className='text-base ml-3 mr-1 text-white'>
-                        <b>TAMUHack</b>
+                        <b>RaceCode</b>
                     </div>
                 </Link>
             </div>

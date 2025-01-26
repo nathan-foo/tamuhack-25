@@ -126,7 +126,7 @@ const CreatePage = () => {
                             </SelectContent>
                         </Select>
                     </div>
-                    <Button className='mt-4' onClick={generateGame} disabled={disabled}>Generate</Button>
+                    <Button className='mt-4 rounded-full' onClick={generateGame} disabled={disabled}>Generate</Button>
                 </div>
             ) : (
                 <div className='flex flex-col items-center justify-center text-center text-white h-screen'>
@@ -141,7 +141,7 @@ const CreatePage = () => {
                     </div>
                 </div>
             )}
-            <div className="absolute h-[375px] w-[130%] rounded-[100%] bg-black left-1/2 -translate-x-1/2 border border-[#B48CDE] bg-[radial-gradient(closest-side,#000000_82%,#9560EB)] top-[calc(100%-125px)]" />
+            <div className="absolute h-[375px] w-[130%] rounded-[100%] bg-black left-1/2 -translate-x-1/2 border border-[#4b2488] bg-[radial-gradient(closest-side,#000000_80%,#47288a)] top-[calc(100%-125px)]"  />
         </div>
     )
 }

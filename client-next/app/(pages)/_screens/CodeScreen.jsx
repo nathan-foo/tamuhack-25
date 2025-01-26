@@ -147,9 +147,10 @@ const CodeScreen = ({ question, setAnswer }) => {
   return (
     <div className="bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip text-white h-screen text-sm pt-16">
       <div className="grid grid-cols-2 gap-4 p-4">
-        <div className="rounded-3xl p-1 bg-gradient-to-b from-purple-600 to-purple-400 h-[400px]">
+        <div className="rounded-3xl p-1">
+        {/* bg-gradient-to-b from-purple-600 to-purple-400 h-[400px] */}
           <div className='flex items-center justify-center h-[390px] rounded-[calc(1.5rem-1px)] p-10 bg-slate-900'>
-            <div className="flex flex-col items-start justify-center gap-4 overflow-y-auto max-h-[500px] set-scrollable-true">
+            <div className="flex flex-col items-start justify-center gap-4 overflow-y-auto max-h-[500px]">
               <div className='font-bold text-xl text-center'>{question.title}</div>
               <div>{question.question}</div>
               <div>

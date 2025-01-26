@@ -2,7 +2,7 @@
 
 ## Inspiration
 
-According to Gemini AI, over 50% of software engineering positions require a technical coding portion as part of the interview process. Because of this, many students use platforms like LeetCode to practice their problem solving skills. The issue, however, is that students often focus only on solving as many questions as possible and forget to practice explaining their thought process, which is equally—if not more—important. That's why we made RaceCode: a multiplayer game platform to nail the technical interview!
+According to Gemini AI, over 80% of software engineering positions require a technical coding portion as part of the interview process. Because of this, many students use platforms like LeetCode to practice their problem solving skills. The issue, however, is that students often focus only on solving as many questions as possible and forget to practice explaining their thought process, which is equally—if not more—important. That's why we made RaceCode: a multiplayer game platform to nail the technical interview!
 
 ## What it does
 

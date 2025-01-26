@@ -13,6 +13,7 @@ export const Hero = () => {
             <div className="flex items-center justify-center relative min-h-screen">
                 {user ? (
                     <div className="text-center">
+
                         <div className="text-6xl font-bold text-white py-4"><Typewriter
                             options={{
                             strings: [`Hello, ${user.firstName}!`],
@@ -28,6 +29,7 @@ export const Hero = () => {
                     </div>
                 ) : (
                     <div className="text-center">
+
                         <div className="text-6xl font-bold mt-8">
                             <Typewriter
                             options={{
@@ -39,8 +41,10 @@ export const Hero = () => {
                         /></div>
                         <p className="text-base mt-6">A 1v1 LeetCode blitz interview preparation game.</p>
                         <Link href="sign-in">
+
                             <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8 ">Get started<ArrowRight/></Button>
                         </Link>
+
                     </div>
                 )}
             </div>

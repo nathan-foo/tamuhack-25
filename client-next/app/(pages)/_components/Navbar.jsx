@@ -22,6 +22,7 @@ const Navbar = () => {
         }
     }, []);
 
+
     return (
         <div className={`hidden md:block fixed top-0 left-0 w-full py-3 px-6 ${isScrolled ? 'shadow-md' : 'shadow-none'} transition-shadow duration-300 z-50`}>
             <div className='flex justify-between'>

@@ -28,11 +28,7 @@ const Navbar = () => {
         <div className='flex justify-between'>
             <div className='flex items-center justify-start gap-3 w-full'>
                 <Link href='/'>
-                    <motion.div className='text-base ml-3 mr-1 text-white'
-                    whileHover={{
-                        color:["#121212", "rgba(131,58,180,1)","rgba(253,29,29,1)","rgba(252,176,69,1)","rgba(131,58,180,1)", "#121212"],
-                        transition: {duration: 1, repeat: Infinity}
-                    }}>
+                    <motion.div className='text-base ml-3 mr-1 text-white'>
                         <b>RaceCode</b>
                     </motion.div>
                 </Link>

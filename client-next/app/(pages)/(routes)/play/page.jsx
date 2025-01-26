@@ -72,17 +72,20 @@ const PlayPage = () => {
     socket.emit('playerJoin', roomId, game.content.questions);
   }, [roomId]);
 
+  // Send message to socket when game starts
   useEffect(() => {
     if (!started) return;
     socket.emit('gameStart', roomId);
   }, [started]);
 
+  // Send message to socket when player answers
   useEffect(() => {
     if (!answer) return;
     socket.emit('playerAnswer', roomId);
     handleFeedback();
   }, [answer]);
 
+  // Send message to socket to move on to intermission screen
   useEffect(() => {
     if (!intermission) return;
     socket.emit('setIntermission', roomId);
@@ -94,6 +97,8 @@ const PlayPage = () => {
     const feedbackResponse = await gameFeedback.sendMessage(FEEDBACK_PROMPT);
     const response = JSON.parse(feedbackResponse.response.text());
     setFeedback(response);
+
+    socket.emit('setScores', player, response.final_score, response.time_complexity.score, response.space_complexity.score, response.dsa.score, response.explanation.score);
   }
 
   return (

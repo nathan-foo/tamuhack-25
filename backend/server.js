@@ -46,11 +46,6 @@ io.on('connection', socket => {
             totalSpaceScore: 0,
             totalDsaScore: 0,
             totalClarityScore: 0,
-            currentScore: 0,
-            currentTimeScore: 0,
-            currentSpaceScore: 0,
-            currentDsaScore: 0,
-            currentClarityScore: 0,
         };
         game.players.push(player);
 
@@ -91,9 +86,20 @@ io.on('connection', socket => {
         }
     });
 
+    socket.on('setScores', (user, final, time, space, dsa, explanation) => {
+        let game = games.find(game => game.roomId === socket.room);
+        let player = game.players.find(p => p.name === user.name);
+
+        player.totalScore += parseInt(final, 10);
+        player.totalTimeScore += parseInt(time, 10);
+        player.totalSpaceScore += parseInt(space, 10);
+        player.totalDsaScore += parseInt(dsa, 10);
+        player.totalClarityScore += parseInt(explanation, 10);
+    });
+
     socket.on('setIntermission', (room) => {
         io.to(room).emit('broadcastIntermission');
-    })
+    });
 
 
 

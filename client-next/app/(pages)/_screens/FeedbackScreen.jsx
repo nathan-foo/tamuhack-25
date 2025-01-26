@@ -63,22 +63,6 @@ const FeedbackScreen = ({ feedback, setIntermission }) => {
                     {feedback.explanation.feedback}
                   </div>
                 </div>
-                {/* <div>
-                  <div className='font-bold text-3xl'>{feedback.time_complexity.score}/10</div>
-                  <div className='py-4 font-bold'>Time Complexity</div>
-                </div>
-                <div>
-                  <div className='font-bold text-3xl'>{feedback.time_complexity.score}/10</div>
-                  <div className='py-4 font-bold'>Space Complexity</div>
-                </div>
-                <div>
-                  <div className='font-bold text-3xl'>{feedback.time_complexity.score}/10</div>
-                  <div className='py-4 font-bold'>Data Structures/Algorithms</div>
-                </div>
-                <div>
-                  <div className='font-bold text-3xl'>{feedback.time_complexity.score}/10</div>
-                  <div className='py-4 font-bold'>Response Effectiveness</div>
-                </div> */}
               </div>
               <div className="flex justify-center pt-4">
                 <Button className="w-[50%] bg-gray-800 text-white hover:bg-gray-700 m-5" onClick={() => setIntermission(true)}>Continue</Button>

@@ -1,13 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 
 const Stars = () => {
-    return (
-        <div>
-            <img src='star.svg' className="z-10 absolute top-[80px] left-[700px] w-[25px] hidden lg:block" />
-            <img src='star.svg' className="z-10 absolute top-[150px] right-[200px] w-[30px]" />
-            <img src='star.svg' className="z-10 absolute top-[160px] left-[180px] w-[40px]" />
-        </div>
-    )
-}
+  const [stars, setStars] = useState([]);
 
-export default Stars
+  useEffect(() => {
+    const numStars = 100;
+    const starsArray = [];
+
+    for (let i = 0; i < numStars; i++) {
+      const star = {
+        left: `${Math.random() * 100}vw`, 
+        top: `${Math.random() * 100}vh`, 
+        size: `${Math.random() * 3 + 1}px`, 
+        delay: `${Math.random() * 2}s`, 
+      };
+      starsArray.push(star);
+    }
+
+    setStars(starsArray);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {stars.map((star, index) => (
+        <div
+          key={index}
+          style={{
+            position: 'absolute',
+            left: star.left,
+            top: star.top,
+            width: star.size,
+            height: star.size,
+            backgroundColor: 'white',
+            borderRadius: '50%',
+            animation: `fadeInOut 3s ${star.delay} infinite`,
+          }}
+        ></div>
+      ))}
+    </div>
+  );
+};
+
+export default Stars;

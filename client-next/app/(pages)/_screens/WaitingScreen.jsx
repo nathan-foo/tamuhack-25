@@ -13,10 +13,10 @@ const WaitingScreen = () => {
       setProgress((prev) => {
         if (currentStep >= steps) {
           clearInterval(timer);
-          return 99; // Ensure it stops at 90
+          return 100;
         }
         currentStep++;
-        return Math.round((currentStep / steps) * 90); // Gradually increase to 90
+        return Math.round((currentStep / steps) * 90);
       });
     }, stepTime);
 

@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^6.10.2",
     "@google/generative-ai": "^0.21.0",
     "@radix-ui/react-dialog": "^1.1.5",
+    "@radix-ui/react-progress": "^1.1.1",
     "@radix-ui/react-select": "^2.1.5",
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
@@ -29,7 +30,8 @@
     "socket.io-client": "^4.8.1",
     "svix": "^1.45.1",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

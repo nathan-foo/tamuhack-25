@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import Link from 'next/link'
 import Stars from "./Stars";
+import Typewriter from 'typewriter-effect';
+import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
     const { user } = useUser();
@@ -11,16 +13,32 @@ export const Hero = () => {
             <div className="flex items-center justify-center relative min-h-screen">
                 {user ? (
                     <div className="text-center">
-                        <p className="text-6xl font-bold text-white py-4">Hello, {user.firstName}!</p>
+                        <p className="text-6xl font-bold text-white py-4"><Typewriter
+                            options={{
+                            strings: ['Hello, {user.firstName}!'], // idk if this works with the user's name
+                            autoStart: true,
+                            pauseFor: 1000000,
+                            loop: true,
+                        }}
+                        /></p>
                         <p className="text-base">Welcome to RaceCode.</p>
-                        <Button className="m-8 px-12">Play</Button>
+                        <Button className="m-8 px-12">Play<ArrowRight/></Button>
                     </div>
                 ) : (
                     <div className="text-center">
-                        <p className="text-6xl font-bold mt-8">Hello, world! Welcome to RaceCode.</p>
+                        
+                        <p className="text-6xl font-bold mt-8">
+                            <Typewriter
+                            options={{
+                            strings: ['Hello, World! Welcome to RaceCode.'],
+                            autoStart: true,
+                            pauseFor: 1000000,
+                            loop: true,
+                        }}
+                        /></p>
                         <p className="text-base mt-6">A 1v1 LeetCode blitz interview preparation game.</p>
                         <Link href="sign-in">
-                            <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8">Get started</Button>
+                            <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8">Get started<ArrowRight/></Button>
                         </Link>
                     </div>
                 )}

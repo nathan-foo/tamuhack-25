@@ -101,7 +101,11 @@ io.on('connection', socket => {
 
     socket.on('setIntermission', (room) => {
         let game = games.find(game => game.roomId === room);
-        io.to(room).emit('broadcastIntermission', game.players);
+
+        const players = game.players;
+        const sortedPlayers = players.sort((a, b) => b.totalScore - a.totalScore);
+
+        io.to(room).emit('broadcastIntermission', sortedPlayers);
     });
 
     socket.on('setNewQuestion', (room) => {
@@ -116,13 +120,13 @@ io.on('connection', socket => {
 
 
 const generateRoomName = () => {
-    return `room-${Date.now()}`;  
+    return `room-${Date.now()}`;
 };
 
 
 const createToken = async () => {
-    const roomName = generateRoomName(); 
-    const participantName = 'player';  
+    const roomName = generateRoomName();
+    const participantName = 'player';
     const apiKey = 'APIaESJERDfgY2i';
     const apiSecret = 'VOfv78FEoHlb8Ty7YyhsQd70MC7NzUxvMSEfcL4dbSk';
 
@@ -134,10 +138,10 @@ const createToken = async () => {
 
     at.addGrant({
         roomJoin: true,
-        room: roomName,  
+        room: roomName,
     });
 
-    return at.toJwt(); 
+    return at.toJwt();
 };
 
 
@@ -145,7 +149,7 @@ app.get('/getToken', async (req, res) => {
     try {
         console.log("Generating token...");
         const token = await createToken();
-        res.json({ token, room: generateRoomName() }); 
+        res.json({ token, room: generateRoomName() });
     } catch (error) {
         console.error("Error generating token:", error);
         res.status(500).json({ error: "Internal Server Error" });

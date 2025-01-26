@@ -1,4 +1,6 @@
 import { Toaster } from "react-hot-toast";
+import Navbar from "./_components/Navbar";
+import MobileNavbar from "./_components/MobileNavbar";
 
 
 const PageLayout = ({ children }) => {
@@ -6,6 +8,8 @@ const PageLayout = ({ children }) => {
         <div>
             <main>
                 <Toaster />
+                <Navbar />
+                <MobileNavbar />
                 
                 {children}
 

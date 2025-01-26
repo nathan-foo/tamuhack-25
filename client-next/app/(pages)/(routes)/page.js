@@ -20,8 +20,8 @@ export default function Home() {
   return (
     <div>
 
-      <Navbar />
-      <MobileNavbar />
+      {/* <Navbar />
+      <MobileNavbar /> */}
       <Hero />
       <LandingInfo />
       <Footer/>

@@ -36,6 +36,6 @@ export async function GET(request) {
 export async function DELETE(request) {
     const id = request.nextUrl.searchParams.get("gameId");
     await connectDB();
-    await Game.findByIdAndDelete(id);
-    return NextResponse.json({ message: "Game Deleted" }, { status: 200 });
+    await Game.findOneAndDelete({ gameId: id });
+    return NextResponse.json({ message: "Game Deleted. Refresh the page to get rid of the icon." }, { status: 200 });
 }

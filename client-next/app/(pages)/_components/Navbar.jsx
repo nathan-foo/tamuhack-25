@@ -4,6 +4,7 @@ import { UserButton, useUser } from '@clerk/nextjs'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
     const { user } = useUser();

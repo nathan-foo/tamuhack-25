@@ -19,6 +19,8 @@ export const Hero = () => {
                         <Button href='/play'className="m-8 px-12 transform hover:scale-110 transition-transform duration-300">Play<ArrowRight/></Button>
                     </Link>
                 </div>
+
+
                 ) : (
                     <div className="text-center">
                         
@@ -34,7 +36,7 @@ export const Hero = () => {
                         <p className="text-base mt-6">A 1v1 LeetCode blitz interview preparation game.</p>
                         <Link href="sign-in">
                             <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8">Get started<ArrowRight/></Button>
-                        </Link>
+                       </Link>
                     </div>
                 )}
             </div>

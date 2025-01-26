@@ -130,7 +130,15 @@ const CreatePage = () => {
                 </div>
             ) : (
                 <div className='flex flex-col items-center justify-center text-center text-white h-screen'>
-                    Game code: {code}
+                    <div className='text-3xl font-bold pb-4'>
+                        Game Code
+                    </div>
+                    <div className='pb-8'>
+                        Share this code to play with your friends.
+                    </div>
+                    <div className='text-6xl font-bold'>
+                        {code}
+                    </div>
                 </div>
             )}
             <div className="absolute h-[375px] w-[130%] rounded-[100%] bg-black left-1/2 -translate-x-1/2 border border-[#B48CDE] bg-[radial-gradient(closest-side,#000000_82%,#9560EB)] top-[calc(100%-125px)]" />

@@ -1,11 +1,12 @@
+const { AccessToken } = require('livekit-server-sdk');
 const express = require('express');
 const { createServer } = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
-
 const app = express();
 const server = createServer(app);
-
+const { Room } = require('livekit-server-sdk');  // Import Room class
+require('dotenv').config();
 app.use(cors());
 
 const io = socketIo(server, {
@@ -112,6 +113,45 @@ io.on('connection', socket => {
         }
     });
 });
+
+
+const generateRoomName = () => {
+    return `room-${Date.now()}`;  
+};
+
+
+const createToken = async () => {
+    const roomName = generateRoomName(); 
+    const participantName = 'player';  
+    const apiKey = 'APIaESJERDfgY2i';
+    const apiSecret = 'VOfv78FEoHlb8Ty7YyhsQd70MC7NzUxvMSEfcL4dbSk';
+
+
+    const at = new AccessToken(apiKey, apiSecret, {
+        identity: participantName,
+    });
+
+
+    at.addGrant({
+        roomJoin: true,
+        room: roomName,  
+    });
+
+    return at.toJwt(); 
+};
+
+
+app.get('/getToken', async (req, res) => {
+    try {
+        console.log("Generating token...");
+        const token = await createToken();
+        res.json({ token, room: generateRoomName() }); 
+    } catch (error) {
+        console.error("Error generating token:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 
 const PORT = process.env.PORT || 8000;
 

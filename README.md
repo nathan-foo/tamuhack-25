@@ -21,17 +21,17 @@ Our project was built with the following technologies:
 - Clerk Authentication
 - React Speech Recognition
 
-User Authentication
+**User Authentication**
 - We used Clerk webhooks to listen for user sign-up events.
 - When a user signs up, the webhook triggers a POST event to create a MongoDB database user.
 
-Game Creation
+**Game Creation**
 - On the Create page, a user has options to set a title, number of rounds, difficulty level, and topic (e.g. arrays, linked lists, etc.) for a new game.
 - When the user submits their options, the data is passed to a Gemini API function to generate the game questions.
 - The output is returned in a JSON format and then stored in MongoDB via a POST request.
 - A game code is generated for players to compete with their friends.
 
-Gameplay
+**Gameplay**
 - Users can join a lobby by entering a game code in the play page.
 - On game start, all players in the lobby are sent to a coding screen. We used socket.io to broadcast events in real time to the players.
 - The coding screen features a question fetched from the database with example outputs, a live camera view of each player using Livekit, and a text and microphone input for users to submit their responses.
@@ -40,8 +40,8 @@ Gameplay
 - The user can then compare their scores against the competition through a leaderboard.
 - This cycle continues until all rounds have been exhausted.
 
-Dashboard
-- The dashboard features all games created by the user, player statistics, and areas of improvement.
+**Dashboard**
+- The dashboard features all games created by the user to review and play again.
 
 ## Challenges we ran into
 

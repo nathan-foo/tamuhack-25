@@ -46,7 +46,7 @@ const CodeScreen = ({ question, setAnswer }) => {
   const [microphone, setMicrophone] = useState(false);
   const [token, setToken] = useState(null);
   const [join, setJoin] = useState(false); // Controls if the user has clicked the button
-  const [counter, setCounter] = useState(1000);  // Countdown timer for 2 minutes
+  const [counter, setCounter] = useState(300);  // Countdown timer for 2 minutes
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const mediaRecorderRef = useRef(null);
@@ -88,7 +88,7 @@ const CodeScreen = ({ question, setAnswer }) => {
     if (counter > 0) {
       startRecording();
       timer = setInterval(() => {
-        setCounter((prev) => prev);  // Decrease counter by 1 every second
+        setCounter((prev) => prev - 1);  // Decrease counter by 1 every second
       }, 1000);
     } else if (counter === 0) {
       stopRecording();

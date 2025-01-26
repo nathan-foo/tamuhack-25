@@ -33,10 +33,14 @@ const DashboardPage = () => {
   }, [user]);
 
   return (
-    <div className="bg-black text-white bg-[linear-gradient(to_bottom,#0000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] relative overflow-clip">
-      <div className="flex items-center justify-center h-screen">
+    <div className="bg-black text-white bg-[linear-gradient(to_bottom,#0000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] overflow-clip relative h-screen">
+      <div className="pt-48"></div>
+      <div className="flex items-center justify-center mb-40 font-bold text-4xl">
+        Your Games
+      </div>
+      <div className="flex items-start justify-center">
         {user && games.length > 0 && (
-          <div className="flex items-center justify-center gap-16 h-screen">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {games.map((game, index) => (
               <DashboardCard key={index} title={game.title} code={game.gameId} />
             ))}

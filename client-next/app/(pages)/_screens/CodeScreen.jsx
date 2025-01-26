@@ -5,6 +5,7 @@ import { FaMicrophone } from "react-icons/fa";
 import { LiveKitRoom, GridLayout, ParticipantTile, TrackRefContext, RoomAudioRenderer, ControlBar, useTracks } from "@livekit/components-react";
 import '@livekit/components-styles';
 import { Track } from 'livekit-client';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 
 function MyVideoConference() {
@@ -49,7 +50,18 @@ const CodeScreen = ({ question, setAnswer }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const mediaRecorderRef = useRef(null);
+  
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
 
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+  
   const serverUrl = "wss://tamuhack-wuv40ylz.livekit.cloud"; // LiveKit server URL
 
   // Fetch token logic
@@ -76,7 +88,7 @@ const CodeScreen = ({ question, setAnswer }) => {
     if (counter > 0) {
       startRecording();
       timer = setInterval(() => {
-        setCounter((prev) => prev - 1);  // Decrease counter by 1 every second
+        setCounter((prev) => prev);  // Decrease counter by 1 every second
       }, 1000);
     } else if (counter === 0) {
       stopRecording();
@@ -141,7 +153,7 @@ const CodeScreen = ({ question, setAnswer }) => {
             </div>
           ) : (
             <div className='flex items-start justify-start'>
-              <div className='bg-slate-900 rounded-md border border-white text-white w-full h-[400px] p-6 text-start'></div>
+              <div className='bg-slate-900 rounded-md border border-white text-white w-full h-[400px] p-6 text-start'>{transcript}</div>
             </div>
           )}
           <div className='flex items-start justify-start bg-slate-900 w-full max-h-[200px] rounded-lg'>
@@ -151,9 +163,9 @@ const CodeScreen = ({ question, setAnswer }) => {
                 setRecording(!recording);
               })}>
                 {!recording ? (
-                  <FaMicrophone className='text-6xl' />
+                  <FaMicrophone className='text-6xl' onClick={() => {SpeechRecognition.startListening({ continuous: true })}} />
                 ) : (
-                  <FaMicrophone className='text-6xl text-red-600' />
+                  <FaMicrophone className='text-6xl text-red-600' onClick={SpeechRecognition.stopListening} />
                 )}
               </button>
               <Button className="px-12 py-4 bg-white text-black hover:bg-gray-100 m-5"

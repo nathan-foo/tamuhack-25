@@ -49,7 +49,7 @@ const CodeScreen = ({ question, setAnswer }) => {
   const [counter, setCounter] = useState(300);  // Countdown timer for 2 minutes
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
-  const [textInput, setTextInput] = useState("");
+  const [textInput, setTextInput] = useState("No Response");
   const mediaRecorderRef = useRef(null);
   
   const {
@@ -93,7 +93,7 @@ const CodeScreen = ({ question, setAnswer }) => {
       }, 1000);
     } else if (counter === 0) {
       stopRecording();
-      window.location.href = "/FeedbackScreen"; // Redirect to the results page when time is up
+      handleSubmit(); // Redirect to the results page when time is up
     }
 
     return () => clearInterval(timer);  // Cleanup timer on unmount or timer stop
@@ -137,7 +137,9 @@ const CodeScreen = ({ question, setAnswer }) => {
       setRecording(false);
       setAnswer(transcript);
     } else {
+      console.log("something submitted");
       if (!textInput) return;
+      console.log("text no work")
       setAnswer(textInput);
     }
   }
@@ -211,8 +213,7 @@ const CodeScreen = ({ question, setAnswer }) => {
                     {/* Timer display */}
                     <div className="timer" style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', position: 'fixed', bottom: 130, left: 400 }}>
                       <p>
-                        Time 
-                        remaining: {String(Math.floor(counter / 60)).padStart(2, '0')}:
+                        Time remaining:<br/> <br/> {String(Math.floor(counter / 60)).padStart(2, '0')}:
                         {String(counter % 60).padStart(2, '0')}
                       </p>
                     </div>

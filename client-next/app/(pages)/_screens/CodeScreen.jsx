@@ -22,17 +22,17 @@ function MyVideoConference() {
         position: 'absolute',
         bottom: 0,
         left: 0,
-        height: '30vh',  // 1/8th of the screen height
-        width: '30vw',   // 1/8th of the screen width
+        height: '30vh',
+        width: '30vw',
       }}
     >
       <div style={{
         display: 'flex',
-        flexDirection: 'column',  // Stack ParticipantTile and Control Panel vertically
+        flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        height: '100%',  // Take full space of the GridLayout container
-        width: '100%',   // Full width of the container
+        height: '100%',
+        width: '100%',
       }}>
         <ParticipantTile style={{ flex: 1 }} />
         <ControlBar variation='minimal' />
@@ -45,8 +45,8 @@ const CodeScreen = ({ question, setAnswer }) => {
   const [recording, setRecording] = useState(false);
   const [microphone, setMicrophone] = useState(false);
   const [token, setToken] = useState(null);
-  const [join, setJoin] = useState(false); // Controls if the user has clicked the button
-  const [counter, setCounter] = useState(300);  // Countdown timer for 2 minutes
+  const [join, setJoin] = useState(false);
+  const [counter, setCounter] = useState(300);
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [textInput, setTextInput] = useState("");
@@ -63,13 +63,13 @@ const CodeScreen = ({ question, setAnswer }) => {
     return <span>Browser doesn't support speech recognition.</span>;
   }
   
-  const serverUrl = "wss://tamuhack-wuv40ylz.livekit.cloud"; // LiveKit server URL
+  const serverUrl = "wss://tamuhack-wuv40ylz.livekit.cloud";
 
   // Fetch token logic
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        const response = await fetch("http://localhost:8000/getToken"); // Replace with your token endpoint
+        const response = await fetch("http://localhost:8000/getToken");
         if (!response.ok) {
           throw new Error("Failed to fetch token");
         }
@@ -89,14 +89,14 @@ const CodeScreen = ({ question, setAnswer }) => {
     if (counter > 0) {
       startRecording();
       timer = setInterval(() => {
-        setCounter((prev) => prev - 1);  // Decrease counter by 1 every second
+        setCounter((prev) => prev - 1);
       }, 1000);
     } else if (counter === 0) {
       stopRecording();
-      window.location.href = "/FeedbackScreen"; // Redirect to the results page when time is up
+      window.location.href = "/FeedbackScreen";
     }
 
-    return () => clearInterval(timer);  // Cleanup timer on unmount or timer stop
+    return () => clearInterval(timer);
   }, [counter]);
 
   // Start recording
@@ -147,7 +147,6 @@ const CodeScreen = ({ question, setAnswer }) => {
       <div className="grid grid-cols-2 gap-4 p-4">
         <div className="rounded-3xl p-1 bg-gradient-to-b from-purple-600 to-purple-400 h-[400px]">
           <div className='flex items-center justify-center h-[390px] rounded-[calc(1.5rem-1px)] p-10 bg-slate-900'>
-            {/* To-do still have to pass in props */}
             <div className="flex flex-col items-start justify-center gap-4 overflow-y-auto max-h-[500px] set-scrollable-true">
               <div className='font-bold text-xl text-center'>{question.title}</div>
               <div>{question.question}</div>
@@ -159,7 +158,6 @@ const CodeScreen = ({ question, setAnswer }) => {
                 <div>Example 2:</div>
                 <div>{question.example_2}</div>
               </div>
-              {/* Remove hard coded answer once text input is given */}
             </div>
           </div>
         </div>
@@ -197,12 +195,12 @@ const CodeScreen = ({ question, setAnswer }) => {
                     token={token}
                     serverUrl={serverUrl}
                     style={{ 
-                      position: 'fixed',   // Keeps video fixed while scrolling
-                      bottom: '0px',      // Adjust distance from the bottom
-                      left: '0px',       // Adjust distance from the right
-                      height: '35vh',      // Height as 35% of the viewport height
-                      width: '35vw',       // Width as 35% of the viewport width
-                      zIndex: 9999,        // Ensures video stays on top
+                      position: 'fixed',
+                      bottom: '0px',
+                      left: '0px',
+                      height: '35vh',
+                      width: '35vw',
+                      zIndex: 9999,
                     }}
                   >
                     <MyVideoConference />

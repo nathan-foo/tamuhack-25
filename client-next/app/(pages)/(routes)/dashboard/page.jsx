@@ -2,6 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
+import DashboardCard from "../../_components/DashboardCard";
 
 const DashboardPage = () => {
   const [games, setGames] = useState([]);
@@ -34,16 +35,12 @@ const DashboardPage = () => {
   return (
     <div className="bg-black text-white bg-[linear-gradient(to_bottom,#0000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] relative overflow-clip">
       <div className="flex items-center justify-center h-screen">
-        {user && games.length > 0 ? (
+        {user && games.length > 0 && (
           <div className="flex items-center justify-center gap-16 h-screen">
             {games.map((game, index) => (
-              <div key={index}>
-                {game.title}: {game.gameId}
-              </div>
+              <DashboardCard key={index} title={game.title} code={game.gameId} />
             ))}
           </div>
-        ) : (
-          <div>Getting games...</div>
         )}
       </div>
     </div>

@@ -78,7 +78,7 @@ const CreatePage = () => {
     }
 
     return (
-        <div className='bg-black bg-[linear-gradient(to_bottom,#0000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] relative overflow-clip'>
+        <div className = "bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip ">
             <Stars />
             {!code ? (
                 <div className='flex flex-col items-center justify-center text-center h-screen'>

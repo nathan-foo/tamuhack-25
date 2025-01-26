@@ -34,7 +34,7 @@ const DashboardPage = () => {
   }, [user]);
 
   return (
-    <div className="bg-black text-white bg-[linear-gradient(to_bottom,#0000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] overflow-clip relative min-h-screen">
+    <div className="bg-black text-white bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip min-h-screen">
       <Stars />
       <div className="pt-56"></div>
       <div className="flex items-center justify-center mb-6 font-bold text-6xl">

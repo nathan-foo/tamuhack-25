@@ -10,7 +10,7 @@ const EndScreen = ({ players }) => {
             Game Over!
           </div>
           {players.map((player, index) => (
-            <div key={index} className='flex items-start justify-between bg-slate-900 py-4 px-16 rounded-lg border border-white text-white'>
+            <div key={index} className='flex items-start justify-between bg-slate-900 py-4 px-16 rounded-lg text-white'>
               <div className='font-bold'>
                 {player.name}
               </div>

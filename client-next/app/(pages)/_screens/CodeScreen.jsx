@@ -167,15 +167,15 @@ const CodeScreen = ({ question, setAnswer }) => {
         <div className='grid grid-rows-2 gap-4'>
           {!microphone ? (
             <div className='flex items-start justify-start'>
-              <Textarea onChange={handleChange} className='bg-slate-900 text-white w-full h-[400px] p-6 text-start' placeholder='Type here...'></Textarea>
+              <Textarea onChange={handleChange} className='bg-slate-900 text-white w-full h-[400px] p-6 text-start border border-transparent rounded-3xl' placeholder='Type here...'></Textarea>
             </div>
           ) : (
             <div className='flex items-start justify-start'>
-              <div className='bg-slate-900 rounded-md border border-white text-white w-full h-[400px] p-6 text-start'>{transcript}</div>
+              <div className='bg-slate-900 rounded-md text-white w-full h-[400px] p-6 text-start'>{transcript}</div>
             </div>
           )}
-          <div className='flex items-start justify-start bg-slate-900 w-full max-h-[200px] rounded-lg'>
-            <div className='flex items-center justify-center text-center h-full w-full text-white border border-white rounded-lg gap-16'>
+          <div className='flex items-start justify-start bg-slate-900 w-full max-h-[200px] rounded-3xl'>
+            <div className='flex items-center justify-center text-center h-full w-full text-white gap-16'>
               <button onClick={(() => {
                 setMicrophone(true);
                 setRecording(!recording);

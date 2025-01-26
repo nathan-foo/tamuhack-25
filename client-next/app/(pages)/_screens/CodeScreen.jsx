@@ -133,6 +133,8 @@ const CodeScreen = ({ question, setAnswer }) => {
 
   const handleSubmit = () => {
     if (microphone) {
+      SpeechRecognition.stopListening();
+      setRecording(false);
       setAnswer(transcript);
     } else {
       if (!textInput) return;

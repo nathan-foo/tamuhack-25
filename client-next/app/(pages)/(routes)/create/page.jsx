@@ -16,6 +16,19 @@ const CreatePage = () => {
 
     const { isLoaded, isSignedIn, user } = useUser();
 
+    const handleEvent1 = (event) => {
+        setTitle(event.target.value);
+    };
+    const handleEvent2 = (event) => {
+        setDifficulty(event.target.value);
+    };
+    const handleEvent3 = (event) => {
+        setTopic(event.target.value);
+    };
+    const handleEvent4 = (event) => {
+        setRounds(event.target.value);
+    };
+
     const generateGame = async () => {
         // Comment in once game is made
         // if (!title || !topic || !rounds) return;
@@ -35,10 +48,10 @@ const CreatePage = () => {
                     'Content-type': 'application/json',
                 },
                 body: JSON.stringify({
-                    title: "Test game",
-                    difficulty: "easy",
-                    topic: "hashmaps",
-                    rounds: "4",
+                    title: title,
+                    difficulty: difficulty,
+                    topic: topic,
+                    rounds: rounds,
                     gameId: gameId,
                     createdBy: userId,
                 }),
@@ -60,9 +73,36 @@ const CreatePage = () => {
     }
 
     return (
-        <div className='flex items-center justify-center h-screen'>
+        <div className='flex flex-col items-center justify-center h-screen'>
             {/* Need to fill out the title, difficulty, topic (like hashmap or array or wtv leetcode topics there are) and # of rounds */}
             {/* Then show game code on screen so player can copy it and share */}
+            <form className='p-10'>
+                <input
+                    className='mx-10 border-2'
+                    type='text'
+                    placeholder='Game Title...'
+                    value={title}
+                    onChange={handleEvent1}></input>
+                <input
+                    className='mx-10 border-2'
+                    type='number'
+                    placeholder='Rounds...'
+                    value={rounds}
+                    onChange={handleEvent4}></input>
+                <select className='mx-10' onChange={handleEvent2} value={difficulty}>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <select className='mx-10' onChange={handleEvent3} value={topic}>
+                    <option value="lists">Lists</option>
+                    <option value="hashmaps">HashMaps</option>
+                    <option value="recursion">Recursion</option>
+                    <option value="graphs">Graphs</option>
+                </select>
+
+            </form>
+
             <button onClick={generateGame}>Generate</button>
         </div>
     )

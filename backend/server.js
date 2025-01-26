@@ -52,7 +52,8 @@ io.on('connection', socket => {
         socket.room = room;
         socket.name = player.name;
 
-        io.to(room).emit('broadcastPlayerJoin', player, game.players);
+        socket.emit('setNewPlayer', player);
+        io.to(room).emit('broadcastPlayerJoin', game.players);
     });
 
     socket.on('disconnect', () => {
@@ -86,8 +87,8 @@ io.on('connection', socket => {
         }
     });
 
-    socket.on('setScores', (user, final, time, space, dsa, explanation) => {
-        let game = games.find(game => game.roomId === socket.room);
+    socket.on('setScores', (room, user, final, time, space, dsa, explanation) => {
+        let game = games.find(game => game.roomId === room);
         let player = game.players.find(p => p.name === user.name);
 
         player.totalScore += parseInt(final, 10);
@@ -98,24 +99,18 @@ io.on('connection', socket => {
     });
 
     socket.on('setIntermission', (room) => {
-        io.to(room).emit('broadcastIntermission');
+        let game = games.find(game => game.roomId === room);
+        io.to(room).emit('broadcastIntermission', game.players);
     });
 
-
-
-    // socket.on('message', (message, room) => {
-    //     console.log(message);
-    //     if (room === '') {
-    //         socket.broadcast.emit('broadcast', message)
-    //     }
-    //     else {
-    //         socket.to(room).emit('broadcast', message);
-    //     }
-    // });
-
-    // socket.on('join-room', room => {
-    //     socket.join(room);
-    // });
+    socket.on('setNewQuestion', (room) => {
+        let game = games.find(game => game.roomId === room);
+        if (game.questionIndex === game.questions.length) {
+            io.to(room).emit('broadcastGameEnd');
+        } else {
+            io.to(room).emit('broadcastNewQuestion', game.questions[game.questionIndex]);
+        }
+    });
 });
 
 const PORT = process.env.PORT || 8000;

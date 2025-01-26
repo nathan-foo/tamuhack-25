@@ -1,9 +1,15 @@
 import React from 'react'
 
-const EndScreen = () => {
+const EndScreen = ({ players }) => {
   return (
     <div className='flex items-center justify-center h-screen'>
-        EndScreen
+      <div className='flex flex-col gap-4'>
+        {players.map((player, index) => (
+          <div key={index}>
+            {player.name}: {player.totalScore}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

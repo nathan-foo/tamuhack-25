@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const StartScreen = ({ title, difficulty, topic, rounds, setStarted, players }) => {
+const StartScreen = ({ title, difficulty, topic, rounds, setStarted, player, players }) => {
   return (
     <>
       <div className='flex items-center justify-center text-center h-screen'>

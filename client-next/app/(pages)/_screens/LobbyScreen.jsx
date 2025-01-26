@@ -52,7 +52,10 @@ const LobbyScreen = ({ setRoomId, setGame, setTitle, setDifficulty, setTopic, se
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+        <div className = "bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip ">
+
+        
+        <div className="flex flex-col items-center justify-center min-h-screen p-4">
             <form
                 onSubmit={handleSubmit}
                 className="w-full max-w-sm bg-white shadow-md rounded-lg p-6"
@@ -80,6 +83,10 @@ const LobbyScreen = ({ setRoomId, setGame, setTitle, setDifficulty, setTopic, se
                     Join Game
                 </Button>
             </form>
+        </div>
+        <div className = "absolute h-[375px] w-[130%] rounded-[100%] bg-black left-1/2 -translate-x-1/2 border border-[#5D2CA8] bg-[radial-gradient(closest-side,#000000_82%,#453491)] top-[calc(100%-125px)]">
+
+            </div>
         </div>
     );
 }

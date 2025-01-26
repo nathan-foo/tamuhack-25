@@ -13,10 +13,33 @@ const StartScreen = ({ title, difficulty, topic, rounds, setStarted, player, pla
   return (
     <>
       <div className='flex items-center justify-center text-center h-screen'>
+      
+  <div className="max-w-md rounded-3xl p-1 bg-gradient-to-b from-purple-600 to-purple-400 ">
+    <div className="rounded-[calc(1.5rem-1px)] p-10 bg-white ">
+    <h3 className="text-lg font-medium text-gray-700">{title}</h3>
+    <p> The game is ready. Click "Start Game" to begin.</p>
+    <p> This game will cover {topic} with a difficulty level of {difficulty} and {rounds} rounds. </p>
+  
+        <div>
+        <div className='mt-4 mb-2 font-bold items-center'>
+              Players
+            </div>
+            <div className='flex items-center justify-center gap-8'>
+              {players.map((player, index) => (
+                <div key={index}>{player.name}</div>
+              ))}
+            </div>
+            <Button className="w-[50%] bg-gray-800 text-white hover:bg-gray-900 m-5" onClick={setStarted}>Start Game</Button>
+          
+     
+      </div>
+    </div>
+  </div>
+
         {/* This is the screen when the players have entered a room code and are waiting to start the game */}
-        <Card className="w-[50%]">
-          <CardHeader >
-            <CardTitle className="m-3" >{title}</CardTitle>
+        {/* <Card className="h-[50%] w-[50%] border-2 border-gray-300 bg-white">
+          <CardHeader>
+            <CardTitle className="m-3">{title}</CardTitle>
             <CardDescription>The game is ready. Click "Start Game" to begin.</CardDescription>
           </CardHeader>
           <CardContent>
@@ -33,8 +56,9 @@ const StartScreen = ({ title, difficulty, topic, rounds, setStarted, player, pla
             </div>
             <Button className="w-[50%] bg-gray-800 text-white hover:bg-gray-900 m-5" onClick={setStarted}>Start Game</Button>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
+
     </>
   )
 }

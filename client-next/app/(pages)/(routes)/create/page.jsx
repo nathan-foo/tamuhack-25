@@ -1,5 +1,7 @@
 "use client"
 
+import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectTrigger, SelectItem, SelectValue } from '@/components/ui/select';
 import { useUser } from '@clerk/nextjs';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -10,28 +12,30 @@ const CreatePage = () => {
     const [difficulty, setDifficulty] = useState("");
     const [topic, setTopic] = useState("");
     const [rounds, setRounds] = useState("");
+    const [disabled, setDisabled] = useState(false);
 
     // Display on screen after game is generated
-    const [gameCode, setGameCode] = useState("");
+    const [code, setCode] = useState("");
 
     const { isLoaded, isSignedIn, user } = useUser();
 
-    const handleEvent1 = (event) => {
+    const handleTitle = (event) => {
         setTitle(event.target.value);
     };
-    const handleEvent2 = (event) => {
-        setDifficulty(event.target.value);
+    const handleDifficulty = (value) => {
+        setDifficulty(value);
     };
-    const handleEvent3 = (event) => {
-        setTopic(event.target.value);
+    const handleTopic = (value) => {
+        setTopic(value);
     };
-    const handleEvent4 = (event) => {
+    const handleRounds = (event) => {
         setRounds(event.target.value);
     };
 
     const generateGame = async () => {
-        // Comment in once game is made
-        // if (!title || !topic || !rounds) return;
+        if (!title || !difficulty || !topic || !rounds) return;
+
+        setDisabled(true);
 
         const url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/games`;
 
@@ -62,7 +66,7 @@ const CreatePage = () => {
                 throw new Error(`Response status: ${response.status}`);
             } else {
                 toast.success('Game created!');
-                setGameCode(gameId);
+                setCode(gameId);
             }
         } catch (error) {
             toast.error('Something went wrong.');
@@ -73,37 +77,54 @@ const CreatePage = () => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center h-screen'>
-            {/* Need to fill out the title, difficulty, topic (like hashmap or array or wtv leetcode topics there are) and # of rounds */}
-            {/* Then show game code on screen so player can copy it and share */}
-            <form className='p-10'>
-                <input
-                    className='mx-10 border-2'
-                    type='text'
-                    placeholder='Game Title...'
-                    value={title}
-                    onChange={handleEvent1}></input>
-                <input
-                    className='mx-10 border-2'
-                    type='number'
-                    placeholder='Rounds...'
-                    value={rounds}
-                    onChange={handleEvent4}></input>
-                <select className='mx-10' onChange={handleEvent2} value={difficulty}>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-                <select className='mx-10' onChange={handleEvent3} value={topic}>
-                    <option value="lists">Lists</option>
-                    <option value="hashmaps">HashMaps</option>
-                    <option value="recursion">Recursion</option>
-                    <option value="graphs">Graphs</option>
-                </select>
+        <div>
+            {!code ? (
+                <div className='flex flex-col items-center justify-center text-center h-screen'>
+                    <input
+                        className='px-28 py-3 text-center rounded-md m-2'
+                        placeholder='Enter game title...'
+                        onChange={handleTitle}>
+                    </input>
+                    <input
+                        className='px-28 py-3 text-center rounded-md m-2'
+                        placeholder='Enter rounds...'
+                        onChange={handleRounds}>
+                    </input>
 
-            </form>
+                    <div className='flex items-center justify-center gap-6'>
+                        <Select onValueChange={handleDifficulty}>
+                            <SelectTrigger className="w-[180px] m-2">
+                                <SelectValue placeholder="Difficulty" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="easy">Easy</SelectItem>
+                                <SelectItem value="medium">Medium</SelectItem>
+                                <SelectItem value="hard">Hard</SelectItem>
+                            </SelectContent>
+                        </Select>
 
-            <button onClick={generateGame}>Generate</button>
+                        <Select onValueChange={handleTopic}>
+                            <SelectTrigger className="w-[180px] m-2">
+                                <SelectValue placeholder="Topic" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="easy">Arrays</SelectItem>
+                                <SelectItem value="medium">Strings</SelectItem>
+                                <SelectItem value="hard">Linked Lists</SelectItem>
+                                <SelectItem value="easy">Hash Maps</SelectItem>
+                                <SelectItem value="medium">Trees</SelectItem>
+                                <SelectItem value="hard">Stacks</SelectItem>
+                                <SelectItem value="easy">Queues</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <Button className='mt-4' onClick={generateGame} disabled={disabled}>Generate</Button>
+                </div>
+            ) : (
+                <div className='flex flex-col items-center justify-center text-center text-white h-screen'>
+                    Game code: {code}
+                </div>
+            )}
         </div>
     )
 }

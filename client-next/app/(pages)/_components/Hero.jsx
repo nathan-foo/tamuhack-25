@@ -23,8 +23,8 @@ export const Hero = () => {
                         }}
                         /></div>
                         <p className="text-base">Welcome to RaceCode.</p>
-                        <Link href="play">
-                            <Button href='/play'className="m-8 px-12 rounded-full bg-white text-black transform hover:bg-gray-200 mx-auto mt-8">Play</Button>
+                        <Link href="/play">
+                            <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8">Play<ArrowRight/></Button>
                         </Link>
                     </div>
                 ) : (
@@ -41,7 +41,6 @@ export const Hero = () => {
                         /></div>
                         <p className="text-base mt-6">A 1v1 LeetCode blitz interview preparation game.</p>
                         <Link href="sign-in">
-
                             <Button className="flex items-center justify-center py-3 px-5 bg-white text-black rounded-full hover:bg-gray-200 mx-auto mt-8 ">Get started<ArrowRight/></Button>
                         </Link>
 

@@ -5,7 +5,8 @@ const FeedbackScreen = ({ feedback, setIntermission }) => {
   return (
     <div className="bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip text-white h-screen">
       <div className="flex items-center justify-center min-h-screen">
-        <div className="w-[80%] rounded-3xl p-1 bg-gradient-to-b from-purple-600 to-purple-400">
+        <div className="w-[80%] rounded-3xl p-1">
+        {/* bg-gradient-to-b from-purple-600 to-purple-400 */}
           <div className="rounded-[calc(1.5rem-1px)] p-10 bg-slate-900">
             <div className='flex flex-col text-center gap-4'>
               <div className='text-4xl font-bold'>Your Score: {feedback.final_score}/10</div>

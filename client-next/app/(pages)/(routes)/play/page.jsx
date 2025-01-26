@@ -121,7 +121,7 @@ const PlayPage = () => {
   }
 
   return (
-    <div>
+    <div className='bg-white'>
       {!game ? (
         // Screen to enter game code
         <LobbyScreen setRoomId={setRoomId} setGame={setGame} setTitle={setTitle} setDifficulty={setDifficulty} setTopic={setTopic} setRounds={setRounds} />

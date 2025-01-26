@@ -77,7 +77,7 @@ const CreatePage = () => {
     }
 
     return (
-        <div>
+        <div className='bg-black bg-[linear-gradient(to_bottom,#0000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] relative overflow-clip'>
             {!code ? (
                 <div className='flex flex-col items-center justify-center text-center h-screen'>
                     <input
@@ -108,13 +108,13 @@ const CreatePage = () => {
                                 <SelectValue placeholder="Topic" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="easy">Arrays</SelectItem>
-                                <SelectItem value="medium">Strings</SelectItem>
-                                <SelectItem value="hard">Linked Lists</SelectItem>
-                                <SelectItem value="easy">Hash Maps</SelectItem>
-                                <SelectItem value="medium">Trees</SelectItem>
-                                <SelectItem value="hard">Stacks</SelectItem>
-                                <SelectItem value="easy">Queues</SelectItem>
+                                <SelectItem value="arrays">Arrays</SelectItem>
+                                <SelectItem value="strings">Strings</SelectItem>
+                                <SelectItem value="linkedlists">Linked Lists</SelectItem>
+                                <SelectItem value="hashmaps">Hash Maps</SelectItem>
+                                <SelectItem value="trees">Trees</SelectItem>
+                                <SelectItem value="stacks">Stacks</SelectItem>
+                                <SelectItem value="queues">Queues</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>

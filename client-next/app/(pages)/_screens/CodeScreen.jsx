@@ -46,7 +46,7 @@ const CodeScreen = ({ question, setAnswer }) => {
   const [microphone, setMicrophone] = useState(false);
   const [token, setToken] = useState(null);
   const [join, setJoin] = useState(false); // Controls if the user has clicked the button
-  const [counter, setCounter] = useState(120);  // Countdown timer for 2 minutes
+  const [counter, setCounter] = useState(300);  // Countdown timer for 2 minutes
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [textInput, setTextInput] = useState("");
@@ -89,11 +89,11 @@ const CodeScreen = ({ question, setAnswer }) => {
     if (counter > 0) {
       startRecording();
       timer = setInterval(() => {
-        setCounter((prev) => prev);  // Decrease counter by 1 every second
+        setCounter((prev) => prev - 1);  // Decrease counter by 1 every second
       }, 1000);
     } else if (counter === 0) {
       stopRecording();
-      window.location.href = "/results"; // Redirect to the results page when time is up
+      window.location.href = "/FeedbackScreen"; // Redirect to the results page when time is up
     }
 
     return () => clearInterval(timer);  // Cleanup timer on unmount or timer stop
@@ -143,14 +143,11 @@ const CodeScreen = ({ question, setAnswer }) => {
   return (
     <div className="bg-black bg-gradient-to-b from-black to-[#5D2CA8] relative overflow-clip text-white h-screen text-sm pt-16">
       <div className="grid grid-cols-2 gap-4 p-4">
-        <div className="rounded-3xl p-1 bg-gradient-to-b from-purple-600 to-purple-400 h-[500px]">
-          <div className='flex items-center justify-center h-full rounded-[calc(1.5rem-1px)] p-10 bg-slate-900'>
+        <div className="rounded-3xl p-1 bg-gradient-to-b from-purple-600 to-purple-400 h-[400px]">
+          <div className='flex items-center justify-center h-[390px] rounded-[calc(1.5rem-1px)] p-10 bg-slate-900'>
             {/* To-do still have to pass in props */}
-            <div
-              className='flex flex-col items-start justify-center gap-4 text-white'
-              style={{ whiteSpace: 'pre-line' }}
-            >
-              <div className='font-bold text-xl'>{question.title}</div>
+            <div className="flex flex-col items-start justify-center gap-4 overflow-y-auto max-h-[500px] set-scrollable-true">
+              <div className='font-bold text-xl text-center'>{question.title}</div>
               <div>{question.question}</div>
               <div>
                 <div>Example 1:</div>
@@ -201,7 +198,7 @@ const CodeScreen = ({ question, setAnswer }) => {
                     style={{ 
                       position: 'fixed',   // Keeps video fixed while scrolling
                       bottom: '0px',      // Adjust distance from the bottom
-                      left: '150px',       // Adjust distance from the right
+                      left: '0px',       // Adjust distance from the right
                       height: '35vh',      // Height as 35% of the viewport height
                       width: '35vw',       // Width as 35% of the viewport width
                       zIndex: 9999,        // Ensures video stays on top
@@ -211,9 +208,10 @@ const CodeScreen = ({ question, setAnswer }) => {
                     <RoomAudioRenderer />
                     </LiveKitRoom>
                     {/* Timer display */}
-                    <div className="timer" style={{ color: 'black', fontSize: '2rem', fontWeight: 'bold', position: 'absolute', top: 85, right: 25 }}>
+                    <div className="timer" style={{ color: 'white', fontSize: '2rem', fontWeight: 'bold', position: 'fixed', bottom: 130, left: 400 }}>
                       <p>
-                        Time remaining: {String(Math.floor(counter / 60)).padStart(2, '0')}:
+                        Time 
+                        remaining: {String(Math.floor(counter / 60)).padStart(2, '0')}:
                         {String(counter % 60).padStart(2, '0')}
                       </p>
                     </div>

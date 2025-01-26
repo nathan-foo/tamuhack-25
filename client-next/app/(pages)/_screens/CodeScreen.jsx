@@ -172,8 +172,8 @@ const CodeScreen = ({ question, setAnswer }) => {
                     serverUrl={serverUrl}
                     style={{ 
                       position: 'fixed',   // Keeps video fixed while scrolling
-                      bottom: '20px',      // Adjust distance from the bottom
-                      left: '-40px',       // Adjust distance from the right
+                      bottom: '0px',      // Adjust distance from the bottom
+                      left: '150px',       // Adjust distance from the right
                       height: '35vh',      // Height as 35% of the viewport height
                       width: '35vw',       // Width as 35% of the viewport width
                       zIndex: 9999,        // Ensures video stays on top

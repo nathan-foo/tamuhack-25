@@ -32,6 +32,8 @@ io.on('connection', socket => {
                     roomId: room,
                     players: [],
                     questions: questions,
+                    questionIndex: 0,
+                    playerAnswers: 0,
                 }
             );
             game = games.find(game => game.roomId === room);
@@ -49,7 +51,6 @@ io.on('connection', socket => {
             currentSpaceScore: 0,
             currentDsaScore: 0,
             currentClarityScore: 0,
-            questionIndex: 0,
         };
         game.players.push(player);
 
@@ -74,10 +75,25 @@ io.on('connection', socket => {
         }
     });
 
-    socket.on('gameStarted', (room) => {
+    socket.on('gameStart', (room) => {
         let game = games.find(game => game.roomId === room);
-        io.to(room).emit('broadcastGameStarted', game.questions[0]);
+        io.to(room).emit('broadcastGameStart', game.questions[0]);
     });
+
+    socket.on('playerAnswer', (room) => {
+        let game = games.find(game => game.roomId === room);
+        game.playerAnswers += 1;
+        if (game.players.length == game.playerAnswers) {
+            // End question
+            io.to(room).emit('broadcastQuestionEnd');
+            game.playerAnswers = 0;
+            game.questionIndex += 1;
+        }
+    });
+
+    socket.on('setIntermission', (room) => {
+        io.to(room).emit('broadcastIntermission');
+    })
 
 
 

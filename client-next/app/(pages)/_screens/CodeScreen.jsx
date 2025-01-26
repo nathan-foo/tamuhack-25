@@ -12,7 +12,7 @@ const CodeScreen = ({ question, setAnswer }) => {
         <div>{question.question}</div>
         <div>{question.example_1}</div>
         <div>{question.example_2}</div>
-        <button onClick={setAnswer}>Submit</button>
+        <button onClick={(() => setAnswer('use a two pointer approach, this algorithm has a time complexity of n^4 and a space complexity of n^2'))}>Submit</button>
       </div>
     </div>
   )

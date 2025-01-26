@@ -10,6 +10,7 @@ import EndScreen from '../../_screens/EndScreen';
 import IntermissionScreen from '../../_screens/IntermissionScreen';
 import { io } from 'socket.io-client';
 import toast from 'react-hot-toast';
+import { gameFeedback } from '@/models/game-feedback';
 
 let socket;
 
@@ -49,10 +50,20 @@ const PlayPage = () => {
       setPlayers(players);
     });
 
-    socket.on('broadcastGameStarted', (question) => {
+    socket.on('broadcastGameStart', (question) => {
       setQuestion(question);
       setStarted(true);
     });
+
+    socket.on('broadcastQuestionEnd', () => {
+      setTimeout(() => {
+        setQuestion("");
+      }, 5000);
+    });
+
+    socket.on('broadcastIntermission', () => {
+      setIntermission(true);
+    })
   }, []);
 
   // Send message to socket when player joins a room
@@ -63,8 +74,27 @@ const PlayPage = () => {
 
   useEffect(() => {
     if (!started) return;
-    socket.emit('gameStarted', roomId);
+    socket.emit('gameStart', roomId);
   }, [started]);
+
+  useEffect(() => {
+    if (!answer) return;
+    socket.emit('playerAnswer', roomId);
+    handleFeedback();
+  }, [answer]);
+
+  useEffect(() => {
+    if (!intermission) return;
+    socket.emit('setIntermission', roomId);
+  }, [intermission]);
+
+  const handleFeedback = async () => {
+    const FEEDBACK_PROMPT = `You are a coding interviewer judging an applicant's response for the following coding question. Give it a rating on a scale of 1 to 10. Take into account time complexity, space complexity, correct usage of data structures and algorithms, and thoroughness of the approach. Do not score generously, but be nice, uplifting, and encouraging in your feedback. An approach that does not work should be given a 1, while only an optimal response should be given a 10. For each piece of feedback, explain how the user could improve on their response. Feedback should be several sentences long. The applicant is not expected to provide code. Address the applicant as \"you\".\n\nTime complexity: whether the algorithm runs in the optimal time.\nSpace complexity: whether the algorithm uses minimal space.\nData structures and algorithms: whether the approach uses optimal data structures and algorithms in the solution.\nThoroughness: whether the response is thorough and complex, explaining the implementation in depth and explaining the time complexity, space complexity, and structures used to you in an understandable way. More detail is better. If the user does not explicitly state the time and space complexity of their algorithm, points should be taken off. If the user does not explain why their approach is the best approach or how it compares to other approaches, points should be taken off.\n\nThe coding question is as follows:\n${question.question}\n\nThe user response is as follows:\n${answer}\n\nStore the output in a JSON format. Follow the following structure:\n{\nfinal_score: String,\nfeedback: String,\ntime_complexity: {\nscore: String,\nfeedback: String,\n},\nspace_complexity: {\nscore: String,\nfeedback: String,\n},\ndsa: {\nscore: String,\nfeedback: String,\n},\nexplanation: {\nscore: String,\nfeedback: String,\n}\n}`;
+
+    const feedbackResponse = await gameFeedback.sendMessage(FEEDBACK_PROMPT);
+    const response = JSON.parse(feedbackResponse.response.text());
+    setFeedback(response);
+  }
 
   return (
     <div>
@@ -101,7 +131,7 @@ const PlayPage = () => {
                         <div>
                           {!intermission ? (
                             // Show feedback for user answer
-                            <FeedbackScreen />
+                            <FeedbackScreen feedback={feedback} setIntermission={setIntermission} />
                           ) : (
                             // Score vs opponent etc.
                             <IntermissionScreen />

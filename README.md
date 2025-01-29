@@ -60,3 +60,7 @@ We learned to use a ton of new technologies that we weren't familiar with, such 
 ## What's next for RaceCode
 
 In the future, we want to improve on RaceCode by adding new game modes, showing more detailed user statistics, and recommending topics to practice based on past game performance.
+
+## Project submission
+
+View our project submission [here](https://youtu.be/DuV20BNjvz4).

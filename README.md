@@ -25,7 +25,7 @@ Our project was built with the following technologies:
 
 **User Authentication**
 - We used Clerk webhooks to listen for user sign-up events.
-- When a user signs up, the webhook triggers a POST event to create a MongoDB database user.
+- When a user signs up, the webhook triggers an API request to create a MongoDB database user.
 
 **Game Creation**
 - On the Create page, a user has options to set a title, number of rounds, difficulty level, and topic (e.g. arrays, linked lists, etc.) for a new game.
@@ -35,10 +35,10 @@ Our project was built with the following technologies:
 
 **Gameplay**
 - Users can join a lobby by entering a game code in the play page.
-- On game start, all players in the lobby are sent to a coding screen. We used socket.io to broadcast events in real time to the players.
+- On game start, all players in the lobby are sent to a coding screen. We used Socket.io to broadcast events in real time to the players.
 - The coding screen features a question fetched from the database with example outputs, a live camera view of each player using Livekit, and a text and microphone input for users to submit their responses.
 - Through the microphone input, players can see a live transcription of their response on the screen. When a user is finished responding, the transcript is parsed into text and sent to Gemini API for evaluation.
-- Once all players have responded, each player gets individual feedback from their answer. Each player receives an overall score, as well as scores for time complexity, space complexity, use of data structures and algorithms, and overall effectiveness of their response, as well as feedback on each category.
+- Once all players have responded, each player gets individual feedback for their answer. Each player receives an overall score, as well as scores for time complexity, space complexity, use of data structures and algorithms, and overall effectiveness of their response, as well as feedback on each category.
 - The user can then compare their scores against the competition through a leaderboard.
 - This cycle continues until all rounds have been exhausted.
 
@@ -55,7 +55,7 @@ We are really happy with how this project turned out! We were able to implement 
 
 ## What we learned
 
-We learned to use a ton of new technologies that we weren't familiar with, such as Livekit, socket.io, and speech recognition. But more importantly, we learned to have fun and to not give up!
+We learned to use a ton of new technologies that we weren't familiar with, such as Livekit, Socket.io, and speech recognition. But more importantly, we learned to have fun and to not give up!
 
 ## What's next for RaceCode
 

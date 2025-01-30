@@ -127,8 +127,8 @@ const generateRoomName = () => {
 const createToken = async () => {
     const roomName = generateRoomName();
     const participantName = 'player';
-    const apiKey = 'APIaESJERDfgY2i';
-    const apiSecret = 'VOfv78FEoHlb8Ty7YyhsQd70MC7NzUxvMSEfcL4dbSk';
+    const apiKey = process.env.API_KEY;
+    const apiSecret = process.env.API_SECRET;
 
 
     const at = new AccessToken(apiKey, apiSecret, {
